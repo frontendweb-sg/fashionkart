@@ -2,8 +2,9 @@ import AuthProvider from "@/context/Auth";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { lato } from "@/utils/AppFont";
-import "./globals.css";
+import classNames from "classnames";
 import Screen from "@/components/common/Screen";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +19,8 @@ export default async function RootLayout({
   const session = await getServerSession();
   return (
     <html lang="en">
-      <body className={lato.className}>
-        <AuthProvider session={session!}>
-          <Screen>{children}</Screen>
-        </AuthProvider>
+      <body className={classNames("min-h-screen", lato.className)}>
+        <AuthProvider session={session!}>{children}</AuthProvider>
       </body>
     </html>
   );
